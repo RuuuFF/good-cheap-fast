@@ -1,11 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+:root {
+  --body-bg: #fff;
+  --text-color: #000;
+  --label-color: #d0d0d0;
+}
+
+html.theme-dark {
+  --body-bg: #222;
+  --text-color: #f1f1f1;
+  --label-color: #444;
+}
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
+  background-color: var(--body-bg);
   height: 100vh;
   margin: 0;
   overflow: hidden;
@@ -13,4 +26,123 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+h1 {
+  color: var(--text-color);
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  width: 200px;
+  color: var(--text-color);
+}
+
+.toggle,
+.toggle-theme {
+  visibility: hidden;
+}
+
+.label {
+  background-color: var(--label-color);
+  border-radius: 50px;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 15px 0 0;
+  width: 80px;
+  height: 40px;
+  position: relative;
+}
+
+.toggle:checked + .label {
+  background-color: #8e44ad;
+}
+
+.ball {
+  background-color: #fff;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  align-items: center;
+  justify-content: center;
+  animation: slideOff 0.3s linear forwards;
+}
+
+.theme-container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+
+.toggle-theme + .label {
+  margin: 0;
+}
+
+.toggle-theme:checked + .label {
+  background-color: var(--label-color);
+}
+
+.toggle-theme + .label > .ball {
+  position: relative;
+  font-size: 19px;
+  line-height: 19px;
+}
+
+.toggle:checked + .label .ball,
+.toggle-theme:checked + .label .ball {
+  animation: slideOn 0.3s linear forwards;
+}
+
+.toggle-theme + .label > .ball i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.toggle-theme:not(:checked) + .label > .ball i.fa-sun {
+  color: orange;
+  opacity: 1;
+  visibility: visible;
+}
+
+.toggle-theme:checked + .label > .ball i.fa-moon {
+  color: #666;
+  opacity: 1;
+  visibility: visible;
+}
+
+@keyframes slideOn {
+  0% {
+    transform: translateX(0) scale(1);
+  }
+
+  50% {
+    transform: translateX(20px) scale(1.2);
+  }
+
+  100% {
+    transform: translateX(40px) scale(1);
+  }
+}
+
+@keyframes slideOff {
+  0% {
+    transform: translateX(40px) scale(1);
+  }
+
+  50% {
+    transform: translateX(20px) scale(1.2);
+  }
+
+  100% {
+    transform: translateX(0) scale(1);
+  }
 }
